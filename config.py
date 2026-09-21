@@ -3,7 +3,7 @@ DB_CONFIG = {
 
 "host": "localhost",
 "user": "biblioteca_user3",
-"password": "SuaSenha123!",
+"password": "projeto3",
 "database": "biblioteca_3ano"
 
 } 
