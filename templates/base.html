@@ -1,83 +1,36 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
 
 
-{% block conteudo %}
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca Escolar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
 
 
-<h2>Empréstimos Cadastrados</h2>
+<body>
 
 
-<p>
-    <a href="/emprestimos/novo">Registrar novo empréstimo</a>
-</p>
+    <header>
+        <h1>Sistema Biblioteca Escolar</h1>
 
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Aluno</th>
-            <th>Livro</th>
-            <th>Bibliotecário</th>
-            <th>Data Empréstimo</th>
-            <th>Previsão Devolução</th>
-            <th>Data Devolução</th>
-            <th>Status</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/alunos">Alunos</a>
+            <a href="/livros">Livros</a>
+            <a href="/bibliotecarios">Bibliotecários</a>
+            <a href="/emprestimos">Empréstimos</a>
+        </nav>
 
 
-    <tbody>
 
-
-        {% for emprestimo in emprestimos %}
-
-
-        <tr>
-
-
-            <td>{{ emprestimo.id_emprestimo }}</td>
-            <td>{{ emprestimo.aluno }}</td>
-            <td>{{ emprestimo.livro }}</td>
-            <td>{{ emprestimo.bibliotecario }}</td>
-            <td>{{ emprestimo.data_emprestimo }}</td>
-            <td>{{ emprestimo.data_prevista_devolucao }}</td>
-            <td>{{ emprestimo.data_devolucao }}</td>
-            <td>{{ emprestimo.status }}</td>
-
-
-            <td>
-
-
-                {% if emprestimo.status == 'Emprestado' %}
-
-
-                <a href="/emprestimos/devolver/{{ emprestimo.id_emprestimo }}">
-                    Devolver
-                </a>
-
-
-                {% else %}
-
-
-                Devolvido
-
-
-                {% endif %}
-
-
-            </td>
-
-
-        </tr>
-
-
-        {% endfor %}
-
-
-    </tbody>
-</table>
-
-
-{% endblock %}
+        <hr>
+    </header>
+    <main>
+        {% block conteudo %}
+        {% endblock %}
+    </main>
+</body>
+</html>
