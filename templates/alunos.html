@@ -7,11 +7,30 @@
 <h2>Alunos Cadastrados</h2>
 
 
+{% if session.perfil in ['admin', 'bibliotecario'] %}
 <p>
     <a href="/alunos/novo">Cadastrar novo aluno</a>
 </p>
+{% endif %}
 
 
+{% if session.perfil not in ['aluno', 'professor'] %}
+<form method="GET" action="/alunos">
+
+
+    <label>Pesquisar aluno:</label>
+    <input type="text" name="pesquisa" value="{{ pesquisa }}" placeholder="Nome, série ou turma">
+
+
+    <button type="submit">Pesquisar</button>
+
+
+    <a href="/alunos">Limpar</a>
+
+
+</form>
+<br>
+{% endif %}
 <table>
     <thead>
         <tr>
@@ -20,7 +39,9 @@
             <th>Série</th>
             <th>Turma</th>
             <th>Telefone</th>
-            <th>Ações</th>
+            {% if session.perfil in ['admin', 'bibliotecario'] %}
+                <th>Ações</th>
+            {% endif %}
         </tr>
     </thead>
 
@@ -33,6 +54,7 @@
             <td>{{ aluno.serie }}</td>
             <td>{{ aluno.turma }}</td>
             <td>{{ aluno.telefone }}</td>
+            {% if session.perfil in ['admin', 'bibliotecario'] %}
             <td>
                 <a href="/alunos/editar/{{ aluno.id_aluno }}">Editar</a>
 
@@ -45,6 +67,7 @@
                     Excluir
                 </a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>

@@ -8,11 +8,44 @@
 
 
 <p>
-    <a href="/emprestimos/novo">Registrar novo empréstimo</a>
+    {% if session.perfil in ['admin', 'bibliotecario'] %}
+        <a href="/emprestimos/novo">Registrar novo empréstimo</a>
+    {% endif %}
 </p>
 
 
-<table>
+<form method="GET" action="/emprestimos">
+
+
+    <label>Filtrar por status:</label>
+
+
+    <select name="status">
+        <option value="">Todos</option>
+
+
+        <option value="Emprestado" {% if status == 'Emprestado' %}selected{% endif %}>
+            Emprestado
+        </option>
+
+
+        <option value="Devolvido" {% if status == 'Devolvido' %}selected{% endif %}>
+            Devolvido
+        </option>
+    </select>
+
+
+    <button type="submit">Filtrar</button>
+
+
+    <a href="/emprestimos">Limpar</a>
+
+
+</form>
+
+
+<br>
+ <table>
     <thead>
         <tr>
             <th>ID</th>
@@ -48,25 +81,15 @@
 
 
             <td>
-
-
-                {% if emprestimo.status == 'Emprestado' %}
-
-
-                <a href="/emprestimos/devolver/{{ emprestimo.id_emprestimo }}">
-                    Devolver
-                </a>
-
-
-                {% else %}
-
-
-                Devolvido
-
-
-                {% endif %}
-
-
+                {% if session.perfil in ['admin', 'bibliotecario'] and emprestimo.status == 'Emprestado' %}
+                    <a href="/emprestimos/devolver/{{ emprestimo.id_emprestimo }}">
+                        Devolver
+                    </a>
+                {% elif emprestimo.status == 'Emprestado' %}
+                    Emprestado
+                 {% else %}
+                    Devolvido
+                 {% endif %}
             </td>
 
 

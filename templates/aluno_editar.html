@@ -4,29 +4,69 @@
 {% block conteudo %}
 
 
-<h2>Editar Aluno</h2>
+<h2>Cadastrar Aluno</h2>
 
 
-<form method="POST" action="/alunos/atualizar/{{ aluno.id_aluno }}">
+<form method="POST" action="/alunos/cadastrar">
 
 
-    <label>Nome:</label>
-    <input type="text" name="nome" value="{{ aluno.nome }}" required>
+    <label>Nome:</label><br>
+    <input type="text" name="nome" required><br><br>
 
 
-    <label>Série:</label>
-    <input type="text" name="serie" value="{{ aluno.serie }}" required>
+    <label>Série:</label><br>
+    <input type="text" name="serie" required><br><br>
 
 
-    <label>Turma:</label>
-    <input type="text" name="turma" value="{{ aluno.turma }}" required>
+    <label>Turma:</label><br>
+    <input type="text" name="turma" required><br><br>
 
 
-    <label>Telefone:</label>
-    <input type="text" name="telefone" value="{{ aluno.telefone }}">
+    <label>Telefone:</label><br>
+    <input type="text" name="telefone"><br><br>
+
+    {% extends "base.html" %}
 
 
-    <button type="submit">Atualizar</button>
+    {% block conteudo %}
+    
+    
+    <h2>Editar Aluno</h2>
+    
+    
+    <form method="POST" action="/alunos/atualizar/{{ aluno.id_aluno }}">
+    
+    
+        <label>Nome:</label>
+        <input type="text" name="nome" value="{{ aluno.nome }}" required>
+    
+    
+        <label>Série:</label>
+        <input type="text" name="serie" value="{{ aluno.serie }}" required>
+    
+    
+        <label>Turma:</label>
+        <input type="text" name="turma" value="{{ aluno.turma }}" required>
+    
+    
+        <label>Telefone:</label>
+        <input type="text" name="telefone" value="{{ aluno.telefone }}">
+    
+    
+        <button type="submit">Atualizar</button>
+    
+    
+    </form>
+    
+    
+    <br>
+    
+    
+    <a href="/alunos">Voltar para lista</a>
+    
+    
+    {% endblock %}
+    <button type="submit">Salvar</button>
 
 
 </form>
